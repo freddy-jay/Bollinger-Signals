@@ -93,6 +93,7 @@ def return_strategy(data, upper, lower):
     position = pd.DataFrame(position).rename(columns = {0:'bb_position'}).set_index(data.index)
 
     frames = [close_price, upper_bb, lower_bb, bb_signal, position]
+    frames = [frame.reset_index() for frame in frames]
     strategy = pd.concat(frames, join = 'inner', axis = 1)
     strategy = strategy.reset_index()
     
